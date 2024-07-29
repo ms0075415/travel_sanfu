@@ -91,7 +91,6 @@ def check_website():
         travel_data, monitored_url = get_travel_data(filter_input)
         
         if travel_data:
-            message = "每小時監控-山富：\n"
             for item in travel_data:
                 出發日 = item['出發日']
                 可售機位 = item['可售機位']
@@ -100,15 +99,9 @@ def check_website():
                     previous_count = previous_seat_counts[出發日]
                     if 可售機位 < previous_count:
                         sold_seats = previous_count - 可售機位
-                        send_line_notify(f"{出發日} 已售出 {sold_seats} 位")
+                        send_line_notify(f"{出發日} 已售出 {sold_seats} 位，剩餘 {可售機位} 位")
                 
                 previous_seat_counts[出發日] = 可售機位
-
-                message += f"{item['出發日']}\n 可售機位：{item['可售機位']} 個, 價格：{item['價格']}\n\n"
-            message += f"\n來源網址：{monitored_url}"
-            send_line_notify(message)
-        else:
-            send_line_notify(f"沒有找到符合條件的資料。\n來源網址：{monitored_url}")
         
     except requests.RequestException as e:
         logging.error(f"檢查網站時發生錯誤: {e}")
