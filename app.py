@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import schedule
 import time
 import logging
-import os
 from datetime import datetime
 
 # LINE Notify token
