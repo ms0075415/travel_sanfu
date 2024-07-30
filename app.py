@@ -121,8 +121,8 @@ def daily_summary():
 # 設置每小時執行一次檢查
 schedule.every().hour.do(check_website)
 
-# 設置每天午夜00:00執行一次整體資訊通知
-schedule.every().day.at("00:00").do(daily_summary)
+# 設置每天午夜00:00執行一次整體資訊通知 -- 放置在雲端時會是早上8:00 如果需要台灣時間要另外做設置
+# schedule.every().day.at("00:00").do(daily_summary)
 
 # 主循環
 if __name__ == "__main__":
